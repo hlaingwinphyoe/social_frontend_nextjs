@@ -68,16 +68,6 @@ export function PostCard({ post }: PostCardProps) {
     }
   }, [showComments, post.id, comments.length])
 
-  const API_URL =
-    process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") ||
-    "http://127.0.0.1:8000"
-
-  const imageSrc = post.image
-    ? post.image.startsWith("http")
-      ? post.image
-      : `${API_URL}/storage/${post.image}`
-    : ""
-
   const handleDeletePost = () => {
     setShowDeleteDialog(true)
   }
@@ -119,7 +109,7 @@ export function PostCard({ post }: PostCardProps) {
             </Button>
           )}
         </div>
-
+        {/* Content */}
         <p className="mt-3 text-sm leading-relaxed whitespace-pre-wrap text-gray-700">
           {post.content}
         </p>
@@ -127,7 +117,7 @@ export function PostCard({ post }: PostCardProps) {
       {post.image && (
         <div className="relative aspect-video w-full border-y bg-gray-50">
           <Image
-            src={imageSrc}
+            src={post.image}
             alt="Post media"
             fill
             unoptimized

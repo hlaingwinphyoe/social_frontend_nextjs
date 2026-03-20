@@ -22,7 +22,7 @@ A responsive social media feed built with Next.js, Tailwind CSS, and Zustand.
 
 ## Reactions & Comments
 
-- **Synchronized Store Ticks**: Implements wrapper triggers (`incrementCommentCount`) that keep reaction ticks fully aligned with cache counters without pulling duplicate bulk arrays contextually.
+- Implements wrapper triggers (`incrementCommentCount`) that keep reaction ticks fully aligned with cache counters without pulling duplicate bulk arrays contextually.
 
 ## Tech Stack & Structure
 
@@ -36,7 +36,7 @@ A responsive social media feed built with Next.js, Tailwind CSS, and Zustand.
 
 ```text
 ├── components/          # Reusable shared global layout widgets
-├── modules/             # functional layouts scoped neatly (auth, posts)
+├── modules/             # functional layouts scoped neatly (auth, posts, profile)
 ├── lib/api/             # API handlers (apiClient axios configuration layers)
 ├── stores/             # Zustand caches hooks
 └── validations/        # Zod schema boundaries

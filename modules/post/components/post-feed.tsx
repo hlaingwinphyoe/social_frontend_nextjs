@@ -6,6 +6,7 @@ import { usePostStore } from "@/stores"
 import { PostCard } from "./post-card"
 import { PostEmpty } from "./post-empty"
 import { PostSkeleton } from "./post-skeleton"
+import { Spinner } from "@/components/ui/spinner"
 
 export function PostFeed() {
   const { posts, meta, isLoading, fetchPosts } = usePostStore()
@@ -52,7 +53,7 @@ export function PostFeed() {
 
       {isLoading && (
         <div className="flex justify-center py-4">
-          <div className="h-6 w-6 animate-spin rounded-full border-3 border-primary border-t-transparent" />
+          <Spinner />
         </div>
       )}
     </div>
