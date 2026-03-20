@@ -20,7 +20,7 @@ export function Navbar() {
 
   const handleLogout = async () => {
     await logout()
-    router.replace("/auth/login")
+    router.replace("/login")
   }
 
   const navItems: NavItem[] = [
@@ -35,7 +35,6 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b bg-white/80 shadow-sm backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-        {/* Logo */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-black text-white">
@@ -56,12 +55,12 @@ export function Navbar() {
                   className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition-all ${
                     isActive
                       ? "bg-primary text-white"
-                      : "text-zinc-600 hover:bg-zinc-100"
+                      : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   <Icon
                     className={`h-4 w-4 ${
-                      isActive ? "text-white" : "text-zinc-500"
+                      isActive ? "text-white" : "text-gray-500"
                     }`}
                   />
                   <span className={isActive ? "inline" : "hidden sm:inline"}>

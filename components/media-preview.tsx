@@ -32,6 +32,7 @@ export function MediaPreview({
           width={600}
           height={400}
           className="max-h-64 w-full object-cover"
+          priority
         />
       )}
     </div>

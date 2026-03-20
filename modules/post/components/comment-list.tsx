@@ -19,14 +19,14 @@ export function CommentList({ comments }: CommentListProps) {
             <Card className="w-full">
               <CardContent>
                 <div className="flex items-baseline gap-2">
-                  <p className="text-xs font-semibold text-zinc-800">
+                  <p className="text-xs font-semibold text-gray-800">
                     {comment.user?.name}
                   </p>
                   <span className="text-[11px] text-muted-foreground">
                     {comment.created_at}
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-zinc-700">{comment.content}</p>
+                <p className="mt-1 text-sm text-gray-700">{comment.content}</p>
               </CardContent>
             </Card>
           </div>

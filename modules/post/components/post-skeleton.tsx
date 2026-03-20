@@ -18,11 +18,11 @@ export function PostSkeleton() {
         </div>
       </div>
 
-      <div className="relative aspect-video w-full bg-zinc-50 border-y">
+      <div className="relative aspect-video w-full border-y bg-gray-50">
         <Skeleton className="absolute inset-0 h-full w-full" />
       </div>
-      
-      <div className="flex items-center gap-4 px-4 py-3 border-t">
+
+      <div className="flex items-center gap-4 border-t px-4 py-3">
         <Skeleton className="h-4 w-12" />
         <Skeleton className="h-4 w-12" />
       </div>

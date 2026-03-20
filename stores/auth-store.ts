@@ -63,6 +63,8 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     try {
       await authService.logout()
+    } catch (error) {
+      console.error("Logout API failed:", error)
     } finally {
       localStorage.removeItem("token")
       set({ user: null, token: null, isAuthenticated: false, isLoading: false })

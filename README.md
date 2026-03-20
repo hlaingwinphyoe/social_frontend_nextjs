@@ -6,7 +6,7 @@ A responsive social media feed built with Next.js, Tailwind CSS, and Zustand.
 
 ## Important Note
 
-- When create the post I manually generate the title according to content coz it is hidden in ui design. In ui it only contains content and image upload
+- When create the post I manually generate the **title** according to content coz it is hidden in ui design. In ui it only contains content and image upload
 - And also Video upload is not design in database design but can upload video or image as you want and file max size is **10MB**
 
 ---
@@ -36,10 +36,10 @@ A responsive social media feed built with Next.js, Tailwind CSS, and Zustand.
 
 ```text
 ├── components/          # Reusable shared global layout widgets
-├── modules/             # Segregated functional layouts scoped neatly (auth, posts)
+├── modules/             # functional layouts scoped neatly (auth, posts)
 ├── lib/api/             # API handlers (apiClient axios configuration layers)
-├── stores/             # lightweight Zustand caches hooks
-└── validations/        # Strict Zod schema boundaries
+├── stores/             # Zustand caches hooks
+└── validations/        # Zod schema boundaries
 ```
 
 ---
@@ -49,8 +49,8 @@ A responsive social media feed built with Next.js, Tailwind CSS, and Zustand.
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
-   cd <repository-name>
+   git clone https://github.com/hlaingwinphyoe/social_frontend_nextjs.git
+   cd social_frontend_nextjs
    ```
 
 2. **Install Dependencies**

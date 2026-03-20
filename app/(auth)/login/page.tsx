@@ -27,7 +27,7 @@ export default function LoginPage() {
 
         {/* Tabs */}
         <Tabs defaultValue="login" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 rounded-xl bg-gray-500/30 mb-2">
+          <TabsList className="mb-2 grid w-full grid-cols-2 rounded-xl bg-gray-500/30">
             <TabsTrigger
               value="login"
               className="rounded-xl text-foreground! data-active:bg-white! data-active:text-foreground"
@@ -44,7 +44,7 @@ export default function LoginPage() {
           </TabsList>
 
           <Card className="rounded-2xl bg-white/40 shadow-xl backdrop-blur-xl">
-            <CardContent>
+            <CardContent className="px-4 py-1">
               <TabsContent value="login">
                 <h2 className="text-lg font-semibold">Welcome back</h2>
                 <p className="mb-4 text-sm text-black/50">
@@ -63,8 +63,8 @@ export default function LoginPage() {
           </Card>
         </Tabs>
         <div className="mt-4 rounded-xl bg-linear-to-r from-purple-200/50 to-blue-300 p-3 text-center text-xs text-white shadow backdrop-blur-xl">
-          <p className="font-medium text-white/80">Demo account for testing:</p>
-          <p className="text-white/60">
+          <p className="font-medium text-white">Demo account for testing:</p>
+          <p className="text-white">
             Email: demo@example.com, Password: demo123
           </p>
         </div>

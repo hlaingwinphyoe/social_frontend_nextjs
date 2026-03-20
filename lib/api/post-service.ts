@@ -16,6 +16,13 @@ export const postService = {
     return data
   },
 
+  async getMyPosts(page = 1, limit = 7): Promise<PaginatedResponse<Post>> {
+    const { data } = await apiClient.get<PaginatedResponse<Post>>("/my-posts", {
+      params: { page, limit },
+    })
+    return data
+  },
+
   async create(payload: CreatePostPayload): Promise<Post> {
     const formData = new FormData()
     formData.append("title", payload.title)

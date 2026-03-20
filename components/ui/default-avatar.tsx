@@ -15,6 +15,7 @@ export function DefaultAvatar({
       width={size}
       height={size}
       className={cn("rounded-full", className)}
+      priority
     />
   )
 }

@@ -1,46 +1,31 @@
 "use client"
 
-import { useCallback, useEffect, useRef } from "react"
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll"
+import { useEffect } from "react"
 import { usePostStore } from "@/stores"
 import { PostCard } from "./post-card"
 import { PostEmpty } from "./post-empty"
-
 import { PostSkeleton } from "./post-skeleton"
 
 export function PostFeed() {
   const { posts, meta, isLoading, fetchPosts } = usePostStore()
-  const observerRef = useRef<IntersectionObserver | null>(null)
-  const feedPostsRef = useRef<HTMLDivElement | null>(null)
 
   const hasMore = meta ? meta.current_page < meta.last_page : false
+
+  const feedPostsRef = useInfiniteScroll({
+    hasMore,
+    isLoading,
+    rootMargin: "200px",
+    onLoadMore: () => {
+      if (meta) {
+        fetchPosts(meta.current_page + 1)
+      }
+    },
+  })
 
   useEffect(() => {
     fetchPosts(1)
   }, [fetchPosts])
-
-  const handleObserver = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      const [entry] = entries
-      if (!entry.isIntersecting || isLoading || !hasMore || !meta) return
-
-      fetchPosts(meta.current_page + 1)
-    },
-    [isLoading, hasMore, meta, fetchPosts]
-  )
-
-  useEffect(() => {
-    if (observerRef.current) observerRef.current.disconnect()
-
-    observerRef.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "200px",
-    })
-
-    if (feedPostsRef.current) {
-      observerRef.current.observe(feedPostsRef.current)
-    }
-
-    return () => observerRef.current?.disconnect()
-  }, [handleObserver])
 
   if (isLoading && posts.length === 0) {
     return (

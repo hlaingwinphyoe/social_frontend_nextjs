@@ -4,10 +4,14 @@ import { postService } from "@/lib/api"
 
 interface PostState {
   posts: Post[]
+  myPosts: Post[]
   meta: PaginationMeta | null
+  myMeta: PaginationMeta | null
   isLoading: boolean
+  isMyPostsLoading: boolean
 
   fetchPosts: (page?: number) => Promise<void>
+  fetchMyPosts: (page?: number) => Promise<void>
   addPost: (post: Post) => void
   updatePost: (post: Post) => void
   removePost: (id: number) => void
@@ -17,8 +21,11 @@ interface PostState {
 
 export const usePostStore = create<PostState>((set, get) => ({
   posts: [],
+  myPosts: [],
   meta: null,
+  myMeta: null,
   isLoading: false,
+  isMyPostsLoading: false,
 
   fetchPosts: async (page = 1) => {
     set({ isLoading: true })
@@ -33,6 +40,22 @@ export const usePostStore = create<PostState>((set, get) => ({
       })
     } finally {
       set({ isLoading: false })
+    }
+  },
+
+  fetchMyPosts: async (page = 1) => {
+    set({ isMyPostsLoading: true })
+
+    try {
+      const response = await postService.getMyPosts(page)
+      const currentPosts = page === 1 ? [] : get().myPosts
+
+      set({
+        myPosts: [...currentPosts, ...response.data],
+        myMeta: response.meta,
+      })
+    } finally {
+      set({ isMyPostsLoading: false })
     }
   },
 

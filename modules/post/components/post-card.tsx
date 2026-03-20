@@ -110,9 +110,7 @@ export function PostCard({ post }: PostCardProps) {
               <p className="text-sm font-semibold text-foreground">
                 {post.user?.name || "Unknown User"}
               </p>
-              <p className="grow text-xs text-muted-foreground">
-                {post.created_at}
-              </p>
+              <p className="text-xs text-muted-foreground">{post.created_at}</p>
             </div>
           </div>
           {post.user_id === user?.id && (
@@ -122,12 +120,12 @@ export function PostCard({ post }: PostCardProps) {
           )}
         </div>
 
-        <p className="mt-3 text-sm leading-relaxed whitespace-pre-wrap text-zinc-700">
+        <p className="mt-3 text-sm leading-relaxed whitespace-pre-wrap text-gray-700">
           {post.content}
         </p>
       </div>
       {post.image && (
-        <div className="relative aspect-video w-full border-y bg-zinc-50">
+        <div className="relative aspect-video w-full border-y bg-gray-50">
           <Image
             src={imageSrc}
             alt="Post media"
@@ -135,6 +133,7 @@ export function PostCard({ post }: PostCardProps) {
             unoptimized
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 600px"
+            priority
           />
         </div>
       )}

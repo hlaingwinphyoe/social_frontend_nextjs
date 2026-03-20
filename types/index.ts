@@ -3,9 +3,9 @@ export interface User {
   id: number
   name: string
   email: string
-  posts_count: number
-  reactions_count: number
-  comments_count: number
+  post_count: number
+  reaction_count: number
+  comment_count: number
   created_at: string
 }
 
