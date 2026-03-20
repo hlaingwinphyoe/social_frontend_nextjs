@@ -1,7 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { AxiosError } from "axios"
@@ -10,15 +9,15 @@ import { loginSchema, type LoginFormValues } from "@/validations"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Field, FieldLabel, FieldError } from "@/components/ui/field"
+import { toast } from "sonner"
 
 export function LoginForm() {
   const router = useRouter()
   const login = useAuthStore((s) => s.login)
   const isLoading = useAuthStore((s) => s.isLoading)
-  const [serverError, setServerError] = useState<string | null>(null)
 
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormValues>({
@@ -27,51 +26,55 @@ export function LoginForm() {
   })
 
   const onSubmit = async (values: LoginFormValues) => {
-    setServerError(null)
-
     try {
       await login(values)
-      router.replace("/home")
+      router.replace("/")
     } catch (error) {
       if (error instanceof AxiosError) {
-        setServerError(
+        toast.error(
           error.response?.data?.message || "Login failed. Please try again."
         )
       } else {
-        setServerError("An unexpected error occurred.")
+        toast.error("An unexpected error occurred.")
       }
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      {serverError && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-center text-sm text-red-600">
-          {serverError}
-        </div>
-      )}
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <Field data-invalid={!!errors.email || undefined}>
+            <FieldLabel htmlFor="email">Email</FieldLabel>
+            <Input
+              {...field}
+              id="email"
+              type="text"
+              placeholder="Enter your email"
+            />
+            <FieldError errors={[errors.email]} />
+          </Field>
+        )}
+      />
 
-      <Field data-invalid={!!errors.email || undefined}>
-        <FieldLabel htmlFor="email">Email</FieldLabel>
-        <Input
-          id="email"
-          type="text"
-          placeholder="Enter your email"
-          {...register("email")}
-        />
-        <FieldError errors={[errors.email]} />
-      </Field>
-
-      <Field data-invalid={!!errors.password || undefined}>
-        <FieldLabel htmlFor="password">Password</FieldLabel>
-        <Input
-          id="password"
-          type="password"
-          placeholder="Enter your password"
-          {...register("password")}
-        />
-        <FieldError errors={[errors.password]} />
-      </Field>
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => (
+          <Field data-invalid={!!errors.password || undefined}>
+            <FieldLabel htmlFor="password">Password</FieldLabel>
+            <Input
+              {...field}
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+            />
+            <FieldError errors={[errors.password]} />
+          </Field>
+        )}
+      />
 
       <Button type="submit" className="w-full" disabled={isLoading}>
         {isLoading ? "Signing in…" : "Sign in"}

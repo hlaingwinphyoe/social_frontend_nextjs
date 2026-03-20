@@ -27,7 +27,7 @@ export default function LoginPage() {
 
         {/* Tabs */}
         <Tabs defaultValue="login" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 rounded-lg bg-gray-500/30">
+          <TabsList className="grid w-full grid-cols-2 rounded-xl bg-gray-500/30 mb-2">
             <TabsTrigger
               value="login"
               className="rounded-xl text-foreground! data-active:bg-white! data-active:text-foreground"

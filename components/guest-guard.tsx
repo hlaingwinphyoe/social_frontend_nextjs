@@ -15,7 +15,7 @@ export function GuestGuard({ children }: GuestGuardProps) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace("/home")
+      router.replace("/")
     } else {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsChecking(false)
