@@ -31,6 +31,7 @@ export function MediaPreview({
           alt="Upload preview"
           width={600}
           height={400}
+          unoptimized
           className="max-h-64 w-full object-cover"
           priority
         />

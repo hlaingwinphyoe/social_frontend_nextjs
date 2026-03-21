@@ -72,7 +72,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   fetchProfile: async () => {
-    set({ isLoading: true })
+    set((state) => ({ isLoading: !state.user }))
 
     try {
       const user = await authService.getProfile()

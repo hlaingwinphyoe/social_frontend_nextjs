@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import type { Comment, Post } from "@/types"
-import { Heart, MessageCircle, Trash2 } from "lucide-react"
+import { Edit, Heart, MessageCircle, Trash2 } from "lucide-react"
 import { useAuthStore, usePostStore } from "@/stores"
 import Image from "next/image"
 
 import { CommentForm } from "./comment-form"
 import { CommentList } from "./comment-list"
+import { EditPostDialog } from "./edit-post-dialog"
 import { Button } from "@/components/ui/button"
 import { DefaultAvatar } from "@/components/ui/default-avatar"
 import {
@@ -41,6 +42,7 @@ export function PostCard({ post }: PostCardProps) {
   const [isLoadingComments, setIsLoadingComments] = useState(false)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [showEditDialog, setShowEditDialog] = useState(false)
 
   const handleToggleReaction = async () => {
     await toggleReaction(post.id)
@@ -67,6 +69,10 @@ export function PostCard({ post }: PostCardProps) {
       fetchComments()
     }
   }, [showComments, post.id, comments.length])
+
+  const handleEditPost = () => {
+    setShowEditDialog(true)
+  }
 
   const handleDeletePost = () => {
     setShowDeleteDialog(true)
@@ -104,9 +110,14 @@ export function PostCard({ post }: PostCardProps) {
             </div>
           </div>
           {post.user_id === user?.id && (
-            <Button variant="ghost" size="icon" onClick={handleDeletePost}>
-              <Trash2 className="h-4 w-4 text-red-500" />
-            </Button>
+            <div className="flex gap-2">
+              <Button variant="ghost" size="icon" onClick={handleEditPost}>
+                <Edit className="h-4 w-4 text-primary" />
+              </Button>
+              <Button variant="ghost" size="icon" onClick={handleDeletePost}>
+                <Trash2 className="h-4 w-4 text-red-500" />
+              </Button>
+            </div>
           )}
         </div>
         {/* Content */}
@@ -198,6 +209,12 @@ export function PostCard({ post }: PostCardProps) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <EditPostDialog
+        post={post}
+        open={showEditDialog}
+        onOpenChange={setShowEditDialog}
+      />
     </div>
   )
 }
