@@ -50,7 +50,8 @@ export const usePostStore = create<PostState>((set) => ({
       const response = await postService.getMyPosts(page)
 
       set((state) => ({
-        myPosts: page === 1 ? response.data : [...state.myPosts, ...response.data],
+        myPosts:
+          page === 1 ? response.data : [...state.myPosts, ...response.data],
         myMeta: response.meta,
       }))
     } finally {
@@ -63,7 +64,6 @@ export const usePostStore = create<PostState>((set) => ({
       posts: [post, ...state.posts],
       myPosts: [post, ...state.myPosts],
     }))
-    useAuthStore.getState().fetchProfile()
   },
 
   updatePost: (updatedPost) => {
@@ -81,7 +81,7 @@ export const usePostStore = create<PostState>((set) => ({
       posts: state.posts.filter(filterer),
       myPosts: state.myPosts.filter(filterer),
     }))
-    useAuthStore.getState().fetchProfile()
+    useAuthStore.getState().fetchProfile() // for profile page
   },
 
   toggleReaction: async (postId) => {
